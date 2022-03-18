@@ -18,9 +18,9 @@ public class Location implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idLocation;
 
-	private int number;
+	private int seatNumber;
 
-	private int row;
+	private int seatRow;
 
 	private String section;
 
@@ -44,21 +44,6 @@ public class Location implements Serializable {
 		this.idLocation = idLocation;
 	}
 
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
 
 	public String getSection() {
 		return section;
@@ -86,6 +71,22 @@ public class Location implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public int getSeatNumber() {
+		return seatNumber;
+	}
+
+	public void setSeatNumber(int seatNumber) {
+		this.seatNumber = seatNumber;
+	}
+
+	public int getSeatRow() {
+		return seatRow;
+	}
+
+	public void setSeatRow(int seatRow) {
+		this.seatRow = seatRow;
 	}
 
 }

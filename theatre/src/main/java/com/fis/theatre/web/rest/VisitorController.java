@@ -3,6 +3,7 @@ package com.fis.theatre.web.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,4 +46,26 @@ public class VisitorController {
 	public List<VisitorDTO> getAll(){
 		return visitorService.getAll();
 	}
+	
+	// get a Visitor byID
+	// get a Visitor byFirstORLastName
+	//	List<Visitor> findByFirstnameOrLastname(String firstname, String lastname); 
+	//update a Visitor send id
+	
+	@RequestMapping("/visitors/get/{id}")
+	public VisitorDTO findById(@PathVariable int id){
+		return visitorService.findById(id);
+	}
+	
+	@RequestMapping("/visitors/get/{firstname}/{lastname}")
+	public List<VisitorDTO> findByFirstAndLastName(@PathVariable String firstname, @PathVariable String lastname){
+		return visitorService.findByFirstnameOrLastname(firstname,lastname);
+	}
+	
+	@RequestMapping(value = "/visitor/save", method = RequestMethod.PUT)
+	public VisitorDTO updateVisitor(@RequestBody VisitorDTO v) {
+		VisitorDTO newVisitor =  visitorService.updateVisitor(v);
+		return newVisitor;
+	}
+	
 }

@@ -16,7 +16,9 @@ public class PerformanceService {
 	@Autowired
 	PerformanceRepository performanceRepo;
 
-	public List<PerformanceDateAndSceneNameDTO> getPerformanceDateAndSceneName(String name) {
+	public List<PerformanceDateAndSceneNameDTO> getPerformanceDateAndSceneName(String name) throws Exception {
+//		throw new Exception();
+
 		List<Performance> performances = performanceRepo.findByShowt_Name(name);
 
 		List<PerformanceDateAndSceneNameDTO> returnList = new ArrayList<PerformanceDateAndSceneNameDTO>();

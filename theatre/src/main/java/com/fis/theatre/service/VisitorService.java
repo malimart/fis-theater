@@ -69,7 +69,7 @@ public class VisitorService {
 //	visitorRepo.save(null);//if we have an ID of the object else if id is null it insert new
 
 	public VisitorDTO findById(int idVisitor) {
-		Visitor v = visitorRepo.findById(idVisitor).get();
+		Visitor v = visitorRepo.getById(idVisitor);//findById(idVisitor).get();
 		VisitorDTO vDTO = new VisitorDTO();
 		vDTO.setFirstname(v.getFirstname());
 		vDTO.setLastname(v.getLastname());
@@ -92,10 +92,9 @@ public class VisitorService {
 	
 	public VisitorDTO updateVisitor(VisitorDTO v) {
 
-		Visitor visitor = new Visitor();
+		Visitor visitor = visitorRepo.getById(v.getVisitorId());
 		visitor.setFirstname(v.getFirstname());
 		visitor.setLastname(v.getLastname());
-		visitor.setIdVisitor(v.getVisitorId());
 
 		Visitor returnVisitor = visitorRepo.save(visitor);
 
@@ -105,8 +104,6 @@ public class VisitorService {
 		newDTOVisitor.setVisitorId(returnVisitor.getIdVisitor());
 
 		return newDTOVisitor;
-//		or simply
-//		return visitorRepo.save(v);;
 	}
 	
 	

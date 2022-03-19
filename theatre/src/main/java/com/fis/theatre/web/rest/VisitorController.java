@@ -58,7 +58,7 @@ public class VisitorController {
 	}
 	
 	@RequestMapping("/visitors/get/{firstname}/{lastname}")
-	public List<VisitorDTO> findByFirstAndLastName(@PathVariable String firstname, @PathVariable String lastname){
+	public List<VisitorDTO> findByFirstOrLastName(@PathVariable String firstname, @PathVariable String lastname){
 		return visitorService.findByFirstnameOrLastname(firstname,lastname);
 	}
 	

@@ -8,5 +8,7 @@ import com.fis.theatre.model.Visitor;
 
 public interface VisitorRepository extends JpaRepository<Visitor, Integer>{
 
-	List<Visitor> findByFirstnameOrLastname(String firstname, String lastname); 
+	List<Visitor> findByFirstnameOrLastname(String firstname, String lastname);
+	//select * from Visitor where firstname like :firstname OR lastname like :lastname;
+	
 }

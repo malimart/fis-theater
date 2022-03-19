@@ -24,7 +24,7 @@ public class Performance implements Serializable {
 
 	//bi-directional many-to-one association to ActsInPerformance
 	@OneToMany(mappedBy="performance")
-	private List<ActsInPerformance> ActsInPerformances;
+	private List<ActsInPerformance> actsInPerformances;
 
 	//bi-directional many-to-one association to Show
 	@ManyToOne
@@ -64,11 +64,11 @@ public class Performance implements Serializable {
 	}
 
 	public List<ActsInPerformance> getActsInPerformances() {
-		return ActsInPerformances;
+		return actsInPerformances;
 	}
 
 	public void setActsInPerformances(List<ActsInPerformance> actsInPerformances) {
-		ActsInPerformances = actsInPerformances;
+		this.actsInPerformances = actsInPerformances;
 	}
 
 	

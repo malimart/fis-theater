@@ -2,9 +2,9 @@ package com.fis.theatre.web.dto;
 
 public class VisitorDTO {
 
-	public String firstname;
-	public String lastname;
-	public int visitorId;
+	private String firstname;
+	private String lastname;
+	private int visitorId;
 
 	public VisitorDTO(String firstname, String lastname, int visitorId) {
 		super();

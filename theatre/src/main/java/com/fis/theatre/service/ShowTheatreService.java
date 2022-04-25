@@ -18,6 +18,30 @@ public class ShowTheatreService {
 	@Autowired
 	ShowTheatreRepository showRepo;
 
+	public List<ShowDTO> getAll() {
+		List<ShowTheatre> shows = showRepo.findAll();
+		List<ShowDTO> returnValue = new ArrayList<ShowDTO>();
+
+		for (ShowTheatre show : shows) {
+			ShowDTO temp = new ShowDTO();
+
+			temp.setName(show.getName());
+			temp.setLength(show.getLength());
+			temp.setDescription(show.getDescription());
+
+			List<String> genersString = new ArrayList<String>();
+			for (GenreShow gs : show.getGenreShows()) {
+				String genre = gs.getGenre().getName();
+				genersString.add(genre);
+			}
+			temp.setGenres(genersString);
+
+			returnValue.add(temp);
+		}
+
+		return returnValue;
+	}
+
 	public List<ShowDTO> getAllShowsForAnActor(String firsname, String lastname) {
 		List<ShowTheatre> shows = showRepo
 				.findDistinctByPerformances_ActsInPerformances_Acts_Actor_FirstNameAndPerformances_ActsInPerformances_Acts_Actor_LastName(

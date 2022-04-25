@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fis.theatre.service.ActorService;
 import com.fis.theatre.web.dto.ActorDTO;
+import com.fis.theatre.web.dto.RoleActorDTO;
 
 @RestController
 public class ActorController {
@@ -29,4 +30,18 @@ public class ActorController {
 
 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@RequestMapping(value = "/actor/saveRole", method = RequestMethod.PUT)
+	public ResponseEntity<Boolean> saveRoleActor(@RequestBody RoleActorDTO actor) {
+
+		try {
+			actorService.saveActorRole(actor);
+			return new ResponseEntity<>(true, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 }

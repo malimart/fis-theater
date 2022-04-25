@@ -1,8 +1,10 @@
 package com.fis.theatre.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -17,6 +19,8 @@ public interface ShowTheatreRepository extends JpaRepository<ShowTheatre, Intege
 			+ "(select acts.role.showt from Acts acts where acts.actor.firstName like :fn "
 			+ "and acts.actor.lastName like :ln)")
 	List<ShowTheatre> getAllShowsForAnActor(@Param("fn") String firstname, @Param("ln") String lastname);
+
+	// HQL select a from Actor a
 	
-	//HQL select a from Actor a
+
 }

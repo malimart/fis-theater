@@ -1,5 +1,7 @@
 package com.fis.theatre.web.rest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,19 @@ public class PerformanceController {
 	public ResponseEntity<List<PerformanceDateAndSceneNameDTO>> getPerformanceDateAndSceneName(@PathVariable String name) {
 		try {
 			return new ResponseEntity<>(performanceServis.getPerformanceDateAndSceneName(name), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	
+	@RequestMapping("/performance/date/{dateStr}")
+	public ResponseEntity<List<PerformanceDateAndSceneNameDTO>> getPerformanceByDate(@PathVariable String dateStr) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = sdf.parse(dateStr);
+			return new ResponseEntity<>(performanceServis.getPerformanceByDate(date), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

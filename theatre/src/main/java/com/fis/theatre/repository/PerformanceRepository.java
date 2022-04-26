@@ -14,4 +14,6 @@ public interface PerformanceRepository extends JpaRepository<Performance, Intege
 	
 	@Transactional
 	long deleteByDate(Date date);
+	
+	List<Performance> findByDate(Date date);
 }

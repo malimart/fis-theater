@@ -18,6 +18,19 @@ public class ShowTheatreService {
 	@Autowired
 	ShowTheatreRepository showRepo;
 
+	public ShowDTO save(ShowDTO showDTO) {
+		ShowTheatre show = new ShowTheatre();
+		
+		show.setDescription(showDTO.getDescription());
+		show.setLength(showDTO.getLength());
+		show.setName(showDTO.getName());
+
+		showRepo.save(show);
+		
+		return showDTO;
+	}
+	
+	
 	public List<ShowDTO> getAll() {
 		List<ShowTheatre> shows = showRepo.findAll();
 		List<ShowDTO> returnValue = new ArrayList<ShowDTO>();

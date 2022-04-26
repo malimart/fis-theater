@@ -62,4 +62,16 @@ public class ShowTheatreController {
 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@RequestMapping("/show/director/{directorId}")
+	public ResponseEntity<List<ShowDTO>> getShowsByDirector(@PathVariable int directorId) {
+		try {
+			List<ShowDTO> shows = showService.getAllShowsForDirector(directorId);
+			return new ResponseEntity<>(shows, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

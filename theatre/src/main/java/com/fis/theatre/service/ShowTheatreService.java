@@ -110,7 +110,30 @@ public class ShowTheatreService {
 	
 	
 	
-	
+	public List<ShowDTO> getAllShowsForDirector(int directorId){
+		List<ShowDTO> returnList = new ArrayList<ShowDTO>();
+		List<ShowTheatre> shows = showRepo.findByDirector_IdDirector(directorId);
+		
+		for (ShowTheatre st : shows) {
+			ShowDTO temp = new ShowDTO();
+			temp.setDescription(st.getDescription());
+			temp.setLength(st.getLength());
+			temp.setName(st.getName());
+
+			List<String> genersString = new ArrayList<String>();
+			for (GenreShow gs : st.getGenreShows()) {
+				String genre = gs.getGenre().getName();
+				genersString.add(genre);
+			}
+
+			temp.setGenres(genersString);
+
+			returnList.add(temp);
+		}
+		
+		
+		return returnList;
+	}
 	
 	
 }

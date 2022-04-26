@@ -23,5 +23,5 @@ public interface ShowTheatreRepository extends JpaRepository<ShowTheatre, Intege
 	// HQL select a from Actor a
 	
 	List<ShowTheatre> findByGenreShows_Genre_IdGenre(int idGenre);
-
+	List<ShowTheatre> findByDirector_IdDirector(int idDirector);
 }

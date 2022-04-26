@@ -15,13 +15,10 @@ import com.fis.theatre.service.PerformanceService;
 import com.fis.theatre.web.dto.PerformanceDateAndSceneNameDTO;
 import com.sun.research.ws.wadl.HTTPMethods;
 
-
 //Create
 //Read (getById, getAll)
 //Update
 //Delete
-
-
 
 @RestController
 public class PerformanceController {
@@ -29,8 +26,19 @@ public class PerformanceController {
 	@Autowired
 	PerformanceService performanceServis;
 
+	@RequestMapping("/performance/scene/{name}")
+	public ResponseEntity<List<PerformanceDateAndSceneNameDTO>> getPerformanceSceneName(@PathVariable String name) {
+		try {
+			return new ResponseEntity<>(performanceServis.getPerformanceByScene(name), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 	@RequestMapping("/performance/date-and-scene/{name}")
-	public ResponseEntity<List<PerformanceDateAndSceneNameDTO>> getPerformanceDateAndSceneName(@PathVariable String name) {
+	public ResponseEntity<List<PerformanceDateAndSceneNameDTO>> getPerformanceDateAndSceneName(
+			@PathVariable String name) {
 		try {
 			return new ResponseEntity<>(performanceServis.getPerformanceDateAndSceneName(name), HttpStatus.OK);
 		} catch (Exception e) {
@@ -38,8 +46,7 @@ public class PerformanceController {
 		}
 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
+
 	@RequestMapping("/performance/date/{dateStr}")
 	public ResponseEntity<List<PerformanceDateAndSceneNameDTO>> getPerformanceByDate(@PathVariable String dateStr) {
 		try {

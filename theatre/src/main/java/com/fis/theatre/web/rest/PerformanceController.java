@@ -15,6 +15,14 @@ import com.fis.theatre.service.PerformanceService;
 import com.fis.theatre.web.dto.PerformanceDateAndSceneNameDTO;
 import com.sun.research.ws.wadl.HTTPMethods;
 
+
+//Create
+//Read (getById, getAll)
+//Update
+//Delete
+
+
+
 @RestController
 public class PerformanceController {
 

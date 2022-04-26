@@ -20,11 +20,9 @@ public class RolesController {
 
 	@RequestMapping("/role/{showName}")
 	public ResponseEntity<List<RoleDTO>> getRolesForShow(@PathVariable String showName) {
-
+		List<RoleDTO> roles = roleService.getRolesOfAShow(showName);
 		try {
-			List<RoleDTO> roles = roleService.getRolesOfAShow(showName);
 			return new ResponseEntity<>(roles, HttpStatus.OK);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -35,4 +35,16 @@ public class ShowTheatreController {
 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@RequestMapping("/show/genre/{genreId}")
+	public ResponseEntity<List<ShowDTO>> getShowsByGenre(@PathVariable int genreId) {
+		try {
+			List<ShowDTO> shows = showService.getAllShowsForGenre(genreId);
+			return new ResponseEntity<>(shows, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

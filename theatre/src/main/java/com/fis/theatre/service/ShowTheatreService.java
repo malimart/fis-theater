@@ -67,4 +67,37 @@ public class ShowTheatreService {
 
 		return returnList;
 	}
+	
+	
+	public List<ShowDTO> getAllShowsForGenre(int genreId){
+		List<ShowDTO> returnList = new ArrayList<ShowDTO>();
+		List<ShowTheatre> shows = showRepo.findByGenreShows_Genre_IdGenre(genreId);
+		
+		for (ShowTheatre st : shows) {
+			ShowDTO temp = new ShowDTO();
+			temp.setDescription(st.getDescription());
+			temp.setLength(st.getLength());
+			temp.setName(st.getName());
+
+			List<String> genersString = new ArrayList<String>();
+			for (GenreShow gs : st.getGenreShows()) {
+				String genre = gs.getGenre().getName();
+				genersString.add(genre);
+			}
+
+			temp.setGenres(genersString);
+
+			returnList.add(temp);
+		}
+		
+		
+		return returnList;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

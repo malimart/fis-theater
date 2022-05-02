@@ -1,5 +1,10 @@
 package com.fis.theatre.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,4 +73,35 @@ public class ActorService {
 		
 		return true;
 	}
+	
+	public List<ActorDTO> findAll(){
+		List<ActorDTO> returnList = new ArrayList<ActorDTO>();
+		List<Actor> actors = actorRepository.findAll();
+		
+		for (Actor actor : actors) {
+			ActorDTO temp = new ActorDTO();
+			
+			temp.setFirstName(actor.getFirstName());
+			temp.setLastName(actor.getLastName());
+			
+			Map<String, String> tempMap = new HashMap();
+			
+			for (Acts acts : actor.getActss()) {
+				String roleName = acts.getRole().getName();
+				for(ActsInPerformance aip : acts.getActsInPerformances()) {
+					String showName = aip.getPerformance().getShowt().getName();
+					tempMap.put(showName, roleName);
+				}
+			}
+			
+			temp.setShowRole(tempMap);
+			
+			
+			returnList.add(temp);
+		}
+		
+		
+		return returnList;
+	}
+	
 }

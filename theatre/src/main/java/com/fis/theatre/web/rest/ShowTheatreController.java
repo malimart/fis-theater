@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fis.theatre.service.ShowTheatreService;
@@ -18,6 +20,19 @@ public class ShowTheatreController {
 	@Autowired
 	ShowTheatreService showService;
 
+	@RequestMapping(value = "/show/insert", method = RequestMethod.POST)
+	public ResponseEntity<ShowDTO> save(@RequestBody ShowDTO showDTO) {
+
+		try {
+			showService.save(showDTO);
+			return new ResponseEntity<>(showDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 	@RequestMapping("/show/getAllShowsForActor/{firstname}/{lastname}")
 	public List<ShowDTO> getAllShowsForActor(@PathVariable String firstname, @PathVariable String lastname) {
 		return showService.getAllShowsForAnActor(firstname, lastname);
@@ -27,6 +42,30 @@ public class ShowTheatreController {
 	public ResponseEntity<List<ShowDTO>> getAll() {
 		try {
 			List<ShowDTO> shows = showService.getAll();
+			return new ResponseEntity<>(shows, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@RequestMapping("/show/genre/{genreId}")
+	public ResponseEntity<List<ShowDTO>> getShowsByGenre(@PathVariable int genreId) {
+		try {
+			List<ShowDTO> shows = showService.getAllShowsForGenre(genreId);
+			return new ResponseEntity<>(shows, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@RequestMapping("/show/director/{directorId}")
+	public ResponseEntity<List<ShowDTO>> getShowsByDirector(@PathVariable int directorId) {
+		try {
+			List<ShowDTO> shows = showService.getAllShowsForDirector(directorId);
 			return new ResponseEntity<>(shows, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

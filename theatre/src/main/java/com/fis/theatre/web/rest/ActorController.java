@@ -1,5 +1,7 @@
 package com.fis.theatre.web.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class ActorController {
 
 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	@RequestMapping(value = "/actor/saveRole", method = RequestMethod.PUT)
 	public ResponseEntity<Boolean> saveRoleActor(@RequestBody RoleActorDTO actor) {
 
@@ -43,5 +45,16 @@ public class ActorController {
 
 		return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
+	@RequestMapping("/actor/getAll")
+	public ResponseEntity<List<ActorDTO>> getActors() {
+		try {
+			List<ActorDTO> actors = actorService.findAll();
+			return new ResponseEntity<>(actors, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

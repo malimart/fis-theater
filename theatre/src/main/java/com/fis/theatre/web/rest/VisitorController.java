@@ -15,7 +15,6 @@ import com.fis.theatre.service.VisitorService;
 import com.fis.theatre.web.dto.VisitorDTO;
 
 @RestController
-@CrossOrigin
 public class VisitorController {
 
 	@Autowired
